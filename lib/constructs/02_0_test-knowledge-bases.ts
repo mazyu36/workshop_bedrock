@@ -53,7 +53,7 @@ export class TestKnowledgeBases extends Construct {
     })
 
     new s3deploy.BucketDeployment(this, 'DeployData', {
-      sources: [s3deploy.Source.asset('./data')],
+      sources: [s3deploy.Source.asset('./data/for-test-knowledge-base')],
       destinationBucket: dataSourceBucket,
     });
 
