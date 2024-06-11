@@ -20,11 +20,6 @@ export class TestAgent extends Construct {
 
     const indexName = 'bedrock-knowledge-base-index';
     const vectorField = 'bedrock-knowledge-base-vector';
-    const instruction = `
-        You are an agent that can handle various tasks related to insurance claims, including looking up claim
-        details, finding what paperwork is outstanding, and sending reminders. Only send reminders if you have been
-        explicitly requested to do so. If an user asks about your functionality, provide guidance in natural language
-        and do not include function names on the output.`;
 
     // Vector Store
     const vectorStore = new opensearchserverless.VectorCollection(this, 'VectorCollectionForAgent', {
@@ -81,6 +76,12 @@ export class TestAgent extends Construct {
     })
 
     // Agents
+    const instruction = `
+    You are an agent that can handle various tasks related to insurance claims, including looking up claim
+    details, finding what paperwork is outstanding, and sending reminders. Only send reminders if you have been
+    explicitly requested to do so. If an user asks about your functionality, provide guidance in natural language
+    and do not include function names on the output.`;
+
     const agent = new bedrock.Agent(this, 'Agent', {
       foundationModel: bedrock.BedrockFoundationModel.ANTHROPIC_CLAUDE_HAIKU_V1_0,
       instruction,
